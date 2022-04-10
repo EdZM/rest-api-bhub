@@ -18,7 +18,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/user/all").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/{userId}").permitAll()
                 .antMatchers(HttpMethod.PUT, "/user/update/{userId}").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/user/delete/{userId}").permitAll();
+                .antMatchers(HttpMethod.DELETE, "/user/delete/{userId}").permitAll()
+                .anyRequest().authenticated();
 
     }
 
