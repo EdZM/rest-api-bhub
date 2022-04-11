@@ -31,11 +31,15 @@ public class UserController {
 
     @GetMapping(value = "/{userId}")
     public ResponseEntity<UserDto> findById(@PathVariable Long userId) throws Exception {
-        Optional<User> response = userService.findById(userId);
-        if(response.isPresent()){
-            return ResponseEntity.ok().body(UserDto.toDto(response.get()));
-        } else {
-            throw new Exception("Usuário não encontrado!");
+        try {
+            Optional<User> response = userService.findById(userId);
+            if(response.isPresent()){
+                return ResponseEntity.ok().body(UserDto.toDto(response.get()));
+            } else {
+                throw new Exception("Usuário não encontrado!");
+            }
+        } catch (Exception ex){
+            throw new Exception(ex);
         }
     }
 
@@ -49,7 +53,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/update/{userId}")
-    public ResponseEntity<HttpStatus> createUser(@PathVariable Long userId, @RequestBody UserDto userDto) throws Exception {
+    public ResponseEntity<HttpStatus> updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) throws Exception {
         try {
             //userService.updateUser(userId, userDto);
         } catch (Exception ex){
@@ -59,15 +63,20 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/delete/{userId}")
-    public ResponseEntity<HttpStatus> createUser(@PathVariable Long userId) throws Exception {
-
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable Long userId) throws Exception {
         try {
-            //userService.deleteUser(userId);
+            Optional<User> user = userService.findById(userId);
+            if(user.isPresent()){
+                userService.deleteUser(user.get());
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            } else {
+                throw new Exception("Usuário não encontrado!");
+            }
         } catch (Exception ex){
             throw new Exception(ex);
         }
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
     }
 
 
