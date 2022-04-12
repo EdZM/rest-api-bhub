@@ -70,7 +70,7 @@ public class UserController {
     @PutMapping(value = "/update/{userId}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) throws Exception {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(UserDto.toDto(userService.updateUser(userId, userDto)));
+            return ResponseEntity.status(HttpStatus.OK).body(UserDto.toDto(userService.updateUser(userId, userDto)));
         } catch (Exception ex){
             throw new Exception(ex);
         }
@@ -79,7 +79,7 @@ public class UserController {
     @PutMapping(value = "/updateBankData/{bankDataId}")
     public ResponseEntity<BankDataDto> updateUserBankData(@PathVariable Long bankDataId, @RequestBody BankDataDto bankDataDto) throws Exception {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(BankDataDto.toDto(userService.updateUserBankData(bankDataId, bankDataDto)));
+            return ResponseEntity.status(HttpStatus.OK).body(BankDataDto.toDto(userService.updateUserBankData(bankDataId, bankDataDto)));
         } catch (Exception ex){
             throw new Exception(ex);
         }
