@@ -68,23 +68,21 @@ public class UserController {
     }
 
     @PutMapping(value = "/update/{userId}")
-    public ResponseEntity<HttpStatus> updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) throws Exception {
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) throws Exception {
         try {
-            userService.updateUser(userId, userDto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(UserDto.toDto(userService.updateUser(userId, userDto)));
         } catch (Exception ex){
             throw new Exception(ex);
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PutMapping(value = "/updateBankData/{bankDataId}")
-    public ResponseEntity<HttpStatus> updateUserBankData(@PathVariable Long bankDataId, @RequestBody BankDataDto bankDataDto) throws Exception {
+    public ResponseEntity<BankDataDto> updateUserBankData(@PathVariable Long bankDataId, @RequestBody BankDataDto bankDataDto) throws Exception {
         try {
-            userService.updateUserBankData(bankDataId, bankDataDto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(BankDataDto.toDto(userService.updateUserBankData(bankDataId, bankDataDto)));
         } catch (Exception ex){
             throw new Exception(ex);
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @DeleteMapping(value = "/delete/{userId}")
@@ -100,8 +98,6 @@ public class UserController {
         } catch (Exception ex){
             throw new Exception(ex);
         }
-
-
     }
 
     @DeleteMapping(value = "/deleteBankData/{bankDataId}")
@@ -117,9 +113,5 @@ public class UserController {
         } catch (Exception ex){
             throw new Exception(ex);
         }
-
-
     }
-
-
 }
