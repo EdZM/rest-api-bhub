@@ -38,7 +38,6 @@ public class UserService {
             List<BankData> bankDataEnities = new ArrayList<>();
             userDto.getBankData().forEach(bankDataDto -> {
                 BankData newBankData = bankDataDto.toBankDataEntity();
-                newBankData.setUser(createdUser);
                 bankDataEnities.add(newBankData);
             });
             bankDataRepository.saveAll(bankDataEnities);
