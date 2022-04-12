@@ -32,9 +32,9 @@ public class BankDataDto {
     public static BankDataDto toDto(BankData bankData) {
         return new BankDataDto(
                 bankData.getId(),
-                bankData.getBankName(),
                 bankData.getBankBranchNumber(),
-                bankData.getAccountNumber()
+                bankData.getAccountNumber(),
+                bankData.getBankName()
         );
     }
 

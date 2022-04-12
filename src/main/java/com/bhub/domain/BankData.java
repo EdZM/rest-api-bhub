@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "bank_data")
+@Table(name = "bank_data", uniqueConstraints={@UniqueConstraint(columnNames = {"bank_branch_number", "account_number" })})
 @Getter
 @Setter
 @NoArgsConstructor

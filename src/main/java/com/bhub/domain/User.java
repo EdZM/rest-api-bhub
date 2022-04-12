@@ -41,7 +41,7 @@ public class User {
     @Column(name = "declared_billing", nullable = false)
     private Double declaredBilling;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<BankData> bankData;
 
     public User(Long id, String corporateName, String phone, String address, LocalDateTime createdAt, LocalDateTime updatedAt, Double declaredBilling){
